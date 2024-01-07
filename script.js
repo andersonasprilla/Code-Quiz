@@ -1,3 +1,9 @@
+var startQuizbtn = document.getElementById("start-btn")
+var title = document.querySelector("h2")
+var description = document.querySelector("p")
+var questionContainer = document.getElementById("question-container")
+
+
 const quizData = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -60,10 +66,19 @@ const quizData = [
     },   
 ]
 
-var currentQuestion = 0;
-
-function startQuiz() {
-    document.getElementById("start-btn").style.display = "none";
+//Hide start quiz btn and h2 upon clicking
+startQuizbtn.addEventListener("click", function () {
+    startQuizbtn.style.display = "none";
+    title.style.display = "none";
+    description.style.display = "none";
     loadQuestion();
+})
+
+function loadQuestion() {
+    //load question
+    questionContainer.textContent = quizData[0].question
+    //load options
+    
+
 }
 
