@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  max-width: 800px; /* You can adjust the max-width as needed */
+  margin: 50px auto;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h1 {
+    font-size:20px;
+    font-family:'Trebuchet MS'
+}
+#header {
+    display: flex;
+    justify-content: space-between;
+}
