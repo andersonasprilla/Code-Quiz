@@ -57,7 +57,13 @@ const quizData = [
         question: "How do you round the number 7.25, to the nearest integer?",
         options: ["Math.rnd(7.25)", "Math.round(7.25)", "rnd(7.25)", "round(7.25)"],
         correctAnswer: 2
-    },
-
-    
+    },   
 ]
+
+var currentQuestion = 0;
+
+function startQuiz() {
+    document.getElementById("start-btn").style.display = "none";
+    loadQuestion();
+}
+

@@ -19,10 +19,12 @@ h1 {
 }
 
 #quiz-container {
+  display:flex;
   width: 80%;
   max-width: 800px; /* You can adjust the max-width as needed */
   margin: 50px auto;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
