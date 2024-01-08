@@ -1,6 +1,6 @@
 var body = document.body;
 
-//Cereate Header
+//Create Header
 var header = document.createElement("header")
 header.id = "header"
 body.appendChild(header)
@@ -22,10 +22,10 @@ quizContainer.appendChild(title)
 
 // Create Description
 var description = document.createElement("p")
-description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scroretime by ten (10) seconds"
+description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten (10) seconds"
 quizContainer.appendChild(description)
 
-//Create Start Button
+//Create Start Button and handle events
 var startQuizBtn = document.createElement("button")
 startQuizBtn.textContent = "Start Quiz"
 quizContainer.appendChild(startQuizBtn)
@@ -37,8 +37,7 @@ startQuizBtn.addEventListener("click", function () {
     setTimer()
 })
 
-
-
+//Data
 const quizData = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -102,7 +101,6 @@ const quizData = [
 ]
 
 var currentQuestionIndex = 0;
-var score = 0;
 function loadQuestion() {
     //Check if there are still questions remaining
     if (currentQuestionIndex < quizData.length) {
@@ -126,6 +124,7 @@ function loadQuestion() {
 
 }
 
+var score = 0;
 function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
     var answerText = document.createElement("h3");
     
@@ -166,7 +165,7 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
 
 
 
-var secondsLeft = 90
+var secondsLeft = 50
     function setTimer() {
         //Set interval
         var timeInterval = setInterval(function () {
