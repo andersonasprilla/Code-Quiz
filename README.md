@@ -2,6 +2,43 @@
 
 Welcome to the Coding Quiz Challenge! Test your JavaScript knowledge with a series of code-related questions. Try to answer as many questions as you can within the time limit. Be cautious, as incorrect answers will result in a time penalty.
 
+## Table of Contents
+
+1. [Installation](#Installation)
+2. [Getting Started](#getting-started)
+3. [Quiz Structure](#quiz-structure)
+4. [Instructions](#instructions)
+5. [Code Structure](#code-structure)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Acknowledgments](#acknowledgments)
+9. [Screenshot](#screenshot)
+
+## Installation
+
+To run the Coding Quiz Challenge on your local machine, follow these steps:
+
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/andersonasprilla/Code-Quiz.git
+    ```
+
+2. **Open the Project:**
+    - Navigate to the project directory:
+        ```bash
+        cd code-quiz
+        ```
+
+3. **Run the Quiz:**
+    - Open the `index.html` file in a web browser to start the quiz.
+
+4. **Enjoy Coding:**
+    - Have fun testing your JavaScript skills!
+
+Make sure you have Git installed on your machine before cloning the repository.
+
+If you encounter any issues during the installation process, feel free to reach out or check the [Contributing](#contributing) section for assistance.
+
 ## Getting Started
 
 1. Clone the repository to your local machine.
@@ -38,3 +75,7 @@ This project is licensed under the [MIT License](LICENSE.md).
 - This quiz template was created for learning and educational purposes.
 
 Have fun coding and testing your JavaScript skills!
+
+## Screenshot
+
+![Badges](./assets/readme-picture.png)
