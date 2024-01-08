@@ -1,5 +1,6 @@
 var body = document.body;
 
+//Cereate Header
 var header = document.createElement("header")
 header.id = "header"
 body.appendChild(header)
@@ -9,19 +10,22 @@ header.appendChild(highScores)
 var timerEl = document.createElement("h1")
 header.appendChild(timerEl)
 
-
+//Create Main Container
 var quizContainer = document.createElement("div")
 quizContainer.id = "quiz-container"
 body.appendChild(quizContainer)
 
+// Create Tittle
 var title = document.createElement("h2")
 title.textContent = "CODING QUIZ CHALLENGE";
 quizContainer.appendChild(title)
 
+// Create Description
 var description = document.createElement("p")
-description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scroretime by ten seconds"
+description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scroretime by ten (10) seconds"
 quizContainer.appendChild(description)
 
+//Create Start Button
 var startQuizBtn = document.createElement("button")
 startQuizBtn.textContent = "Start Quiz"
 quizContainer.appendChild(startQuizBtn)
@@ -33,7 +37,7 @@ startQuizBtn.addEventListener("click", function () {
     setTimer()
 })
 
-var answerText = document.createElement("h3")
+
 
 const quizData = [
     {
@@ -123,22 +127,43 @@ function loadQuestion() {
 }
 
 function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
+    var answerText = document.createElement("h3");
+    
     // Check if the selected answer is correct
     if (selectedAnswer === quizData[currentQuestionIndex].options[correctAnswerIndex]) {
         score++;
-    }else {      
-        secondsLeft-= 10
-        answerText.textContent = "Wrong"
-        quizContainer.appendChild(answerText)
-        return
+        answerText.textContent = "Correct";
+    } else {      
+        secondsLeft -= 10;
+        answerText.textContent = "Wrong";
+        quizContainer.appendChild(answerText);
+        
+        // Delay before clearing the quiz container and loading the next question
+        setTimeout(function () {
+            // Move to the next question
+            currentQuestionIndex++;
+            // Clear the quiz container for the next question
+            quizContainer.innerHTML = "";
+            // Load the next question or end the quiz if there are no more questions
+            loadQuestion();
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+        return;
     }
-    // Move to the next question
-    currentQuestionIndex++;
-    // Clear the quiz container for the next question
-    quizContainer.innerHTML = "";
-    // Load the next question or end the quiz if there are no more questions
-    loadQuestion();
+    
+    // Display the answer text
+    quizContainer.appendChild(answerText);
+
+    // Delay before clearing the quiz container and loading the next question
+    setTimeout(function () {
+        // Move to the next question
+        currentQuestionIndex++;
+        // Clear the quiz container for the next question
+        quizContainer.innerHTML = "";
+        // Load the next question or end the quiz if there are no more questions
+        loadQuestion();
+    }, 1000); // Adjust the delay time (in milliseconds) as needed
 }
+
 
 
 var secondsLeft = 90
