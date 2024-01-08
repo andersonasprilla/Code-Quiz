@@ -102,16 +102,16 @@ startQuizBtn.addEventListener("click", function () {
 
 var currentQuestionIndex = 0;
 function loadQuestion() {
-    //Check if there are still questions remaining
-    if (currentQuestionIndex < quizData.length) {
-        var currentQuestion = quizData[currentQuestionIndex]
+    // Check if there are still questions remaining and if the timer is not 0
+    if (currentQuestionIndex < quizData.length && secondsLeft > 0) {
+        var currentQuestion = quizData[currentQuestionIndex];
 
-        //Display the question
-        var question = document.createElement("div")
-        question.textContent = currentQuestion.question
-        quizContainer.appendChild(question)
+        // Display the question
+        var question = document.createElement("div");
+        question.textContent = currentQuestion.question;
+        quizContainer.appendChild(question);
 
-        //Display options
+        // Display options
         for (var i = 0; i < currentQuestion.options.length; i++) {
             var option = document.createElement("button");
             option.textContent = currentQuestion.options[i];
@@ -121,10 +121,17 @@ function loadQuestion() {
             quizContainer.appendChild(option);
         }
     } else {
-        inputInitials()
+        if (secondsLeft <= 0) {
+            // Timer has reached 0, execute inputInitials
+            inputInitials();
+        } else {
+            // No more questions, execute inputInitials
+            inputInitials();
+        }
     }
-
 }
+
+
 
 var score = 0;
 function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
@@ -141,13 +148,10 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
 
         // Delay before clearing the quiz container and loading the next question
         setTimeout(function () {
-            // Move to the next question
             currentQuestionIndex++;
-            // Clear the quiz container for the next question
             quizContainer.innerHTML = "";
-            // Load the next question or end the quiz if there are no more questions
             loadQuestion();
-        }, 1000); // Adjust the delay time (in milliseconds) as needed
+        }, 1000); 
         return;
     }
 
@@ -158,12 +162,10 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
     setTimeout(function () {
         // Move to the next question
         currentQuestionIndex++;
-        // Clear the quiz container for the next question
         quizContainer.innerHTML = "";
-        // Load the next question or end the quiz if there are no more questions
         loadQuestion();
 
-    }, 1000); // Adjust the delay time (in milliseconds) as needed
+    }, 1000); 
 }
 
 
