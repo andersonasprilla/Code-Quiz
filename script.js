@@ -1,42 +1,3 @@
-var body = document.body;
-
-//Create Header
-var header = document.createElement("header")
-header.id = "header"
-body.appendChild(header)
-var highScores = document.createElement("h1")
-highScores.textContent = "View Highscores"
-header.appendChild(highScores)
-var timerEl = document.createElement("h1")
-header.appendChild(timerEl)
-
-//Create Main Container
-var quizContainer = document.createElement("div")
-quizContainer.id = "quiz-container"
-body.appendChild(quizContainer)
-
-// Create Tittle
-var title = document.createElement("h2")
-title.textContent = "CODING QUIZ CHALLENGE";
-quizContainer.appendChild(title)
-
-// Create Description
-var description = document.createElement("p")
-description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten (10) seconds"
-quizContainer.appendChild(description)
-
-//Create Start Button and handle events
-var startQuizBtn = document.createElement("button")
-startQuizBtn.textContent = "Start Quiz"
-quizContainer.appendChild(startQuizBtn)
-startQuizBtn.addEventListener("click", function () {
-    title.style.display = "none"
-    description.style.display = "none"
-    startQuizBtn.style.display = "none"
-    loadQuestion()
-    setTimer()
-})
-
 //Data
 const quizData = [
     {
@@ -100,6 +61,45 @@ const quizData = [
     },
 ]
 
+var body = document.body;
+
+//Create Header
+var header = document.createElement("header")
+header.id = "header"
+body.appendChild(header)
+var highScores = document.createElement("h1")
+highScores.textContent = "View Highscores"
+header.appendChild(highScores)
+var timerEl = document.createElement("h1")
+header.appendChild(timerEl)
+
+//Create Main Container
+var quizContainer = document.createElement("div")
+quizContainer.id = "quiz-container"
+body.appendChild(quizContainer)
+
+// Create Tittle
+var title = document.createElement("h2")
+title.textContent = "CODING QUIZ CHALLENGE";
+quizContainer.appendChild(title)
+
+// Create Description
+var description = document.createElement("p")
+description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten (10) seconds"
+quizContainer.appendChild(description)
+
+//Create Start Button and handle events
+var startQuizBtn = document.createElement("button")
+startQuizBtn.textContent = "Start Quiz"
+quizContainer.appendChild(startQuizBtn)
+startQuizBtn.addEventListener("click", function () {
+    title.style.display = "none"
+    description.style.display = "none"
+    startQuizBtn.style.display = "none"
+    loadQuestion()
+    setTimer()
+})
+
 var currentQuestionIndex = 0;
 function loadQuestion() {
     //Check if there are still questions remaining
@@ -120,6 +120,8 @@ function loadQuestion() {
             });
             quizContainer.appendChild(option);
         }
+    } else {
+        inputInitials()
     }
 
 }
@@ -160,6 +162,7 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
         quizContainer.innerHTML = "";
         // Load the next question or end the quiz if there are no more questions
         loadQuestion();
+        
     }, 1000); // Adjust the delay time (in milliseconds) as needed
 }
 
@@ -175,8 +178,43 @@ var secondsLeft = 50
             if (secondsLeft === 0) {
                 // Stops execution of action at set interval
                 clearInterval(timeInterval);
-                // Calls function to create and append image
-                sendMessage();
             }
         }, 1000)
+    }
+
+    function inputInitials() {
+        // create a form 
+        var formEl = document.createElement("form")
+        quizContainer.appendChild(formEl)
+    
+        var initialsInput = document.createElement("input")
+        initialsInput.type = "text"
+        initialsInput.placeholder = "Type your initials"
+        formEl.appendChild(initialsInput)
+    
+        // submit button
+        var submitBtn = document.createElement("button")
+        submitBtn.textContent = "Submit"
+        formEl.appendChild(submitBtn)
+    
+        // add submit button click event listener
+        submitBtn.addEventListener("click", function () {
+            var initials = initialsInput.value;
+            showScores(initials);
+        });
+    }
+    
+    function showScores(initials) {
+        // clear the quiz container
+        quizContainer.innerHTML = "";
+    
+        // display the total score
+        var totalScore = document.createElement("h2")
+        totalScore.textContent = "Total Score: " + score
+        quizContainer.appendChild(totalScore);
+    
+        // display the initials
+        var initialsDisplay = document.createElement("p");
+        initialsDisplay.textContent = "Your Initials: " + initials;
+        quizContainer.appendChild(initialsDisplay);
     }
