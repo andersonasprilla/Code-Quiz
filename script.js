@@ -1,8 +1,26 @@
-var startQuizbtn = document.getElementById("start-btn")
-var title = document.querySelector("h2")
-var description = document.querySelector("p")
-var questionContainer = document.getElementById("question-container")
+var body = document.body;
 
+var quizContainer = document.createElement("div")
+quizContainer.id = "quiz-container"
+body.appendChild(quizContainer)
+
+var title = document.createElement("h2")
+title.textContent = "CODING QUIZ CHALLENGE";
+quizContainer.appendChild(title)
+
+var description = document.createElement("p")
+description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scroretime by ten seconds"
+quizContainer.appendChild(description)
+
+var startQuizBtn = document.createElement("button")
+startQuizBtn.textContent= "Start Quiz"
+quizContainer.appendChild(startQuizBtn)
+startQuizBtn.addEventListener("click", function() {
+    title.style.display = "none"
+    description.style.display = "none"
+    startQuizBtn.style.display = "none"
+    loadQuestion()
+})
 
 const quizData = [
     {
@@ -66,19 +84,4 @@ const quizData = [
     },   
 ]
 
-//Hide start quiz btn and h2 upon clicking
-startQuizbtn.addEventListener("click", function () {
-    startQuizbtn.style.display = "none";
-    title.style.display = "none";
-    description.style.display = "none";
-    loadQuestion();
-})
-
-function loadQuestion() {
-    //load question
-    questionContainer.textContent = quizData[0].question
-    //load options
-    
-
-}
 
