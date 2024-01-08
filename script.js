@@ -1,5 +1,15 @@
 var body = document.body;
 
+var header = document.createElement("header")
+header.id = "header"
+body.appendChild(header)
+var highScores = document.createElement("h1")
+highScores.textContent = "View Highscores"
+header.appendChild(highScores)
+var timerEl = document.createElement("h1")
+header.appendChild(timerEl)
+
+
 var quizContainer = document.createElement("div")
 quizContainer.id = "quiz-container"
 body.appendChild(quizContainer)
@@ -13,13 +23,14 @@ description.textContent = "Try to answer the following code-related questions wi
 quizContainer.appendChild(description)
 
 var startQuizBtn = document.createElement("button")
-startQuizBtn.textContent= "Start Quiz"
+startQuizBtn.textContent = "Start Quiz"
 quizContainer.appendChild(startQuizBtn)
-startQuizBtn.addEventListener("click", function() {
+startQuizBtn.addEventListener("click", function () {
     title.style.display = "none"
     description.style.display = "none"
     startQuizBtn.style.display = "none"
     loadQuestion()
+    setTimer()
 })
 
 const quizData = [
@@ -81,14 +92,13 @@ const quizData = [
         question: "How do you round the number 7.25, to the nearest integer?",
         options: ["Math.rnd(7.25)", "Math.round(7.25)", "rnd(7.25)", "round(7.25)"],
         correctAnswer: 2
-    },   
+    },
 ]
 
 var currentQuestionIndex = 0;
-
 function loadQuestion() {
     //Check if there are still questions remaining
-    if(currentQuestionIndex < quizData.length){
+    if (currentQuestionIndex < quizData.length) {
         var currentQuestion = quizData[currentQuestionIndex]
 
         //Display the question
@@ -97,15 +107,27 @@ function loadQuestion() {
         quizContainer.appendChild(question)
 
         //Display options
-        for(var i = 0; i < currentQuestion.options.length; i++){
+        for (var i = 0; i < currentQuestion.options.length; i++) {
             var option = document.createElement("button");
             option.textContent = currentQuestion.options[i]
             quizContainer.appendChild(option)
         }
     }
 
-   
-    
-    
-
 }
+
+var secondsLeft = 90
+    function setTimer() {
+        //Set interval
+        var timeInterval = setInterval(function () {
+            secondsLeft--;
+            timerEl.textContent = "Time " + secondsLeft 
+
+            if (secondsLeft === 0) {
+                // Stops execution of action at set interval
+                clearInterval(timeInterval);
+                // Calls function to create and append image
+                sendMessage();
+            }
+        }, 1000)
+    }
