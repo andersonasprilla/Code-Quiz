@@ -129,16 +129,16 @@ function loadQuestion() {
 var score = 0;
 function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
     var answerText = document.createElement("h3");
-    
+
     // Check if the selected answer is correct
     if (selectedAnswer === quizData[currentQuestionIndex].options[correctAnswerIndex]) {
         score++;
         answerText.textContent = "Correct";
-    } else {      
+    } else {
         secondsLeft -= 10;
         answerText.textContent = "Wrong";
         quizContainer.appendChild(answerText);
-        
+
         // Delay before clearing the quiz container and loading the next question
         setTimeout(function () {
             // Move to the next question
@@ -150,7 +150,7 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
         }, 1000); // Adjust the delay time (in milliseconds) as needed
         return;
     }
-    
+
     // Display the answer text
     quizContainer.appendChild(answerText);
 
@@ -162,59 +162,59 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
         quizContainer.innerHTML = "";
         // Load the next question or end the quiz if there are no more questions
         loadQuestion();
-        
+
     }, 1000); // Adjust the delay time (in milliseconds) as needed
 }
 
 
 
 var secondsLeft = 50
-    function setTimer() {
-        //Set interval
-        var timeInterval = setInterval(function () {
-            secondsLeft--;
-            timerEl.textContent = "Time " + secondsLeft 
+function setTimer() {
+    //Set interval
+    var timeInterval = setInterval(function () {
+        secondsLeft--;
+        timerEl.textContent = "Time " + secondsLeft
 
-            if (secondsLeft === 0) {
-                // Stops execution of action at set interval
-                clearInterval(timeInterval);
-            }
-        }, 1000)
-    }
+        if (secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timeInterval);
+        }
+    }, 1000)
+}
 
-    function inputInitials() {
-        // create a form 
-        var formEl = document.createElement("form")
-        quizContainer.appendChild(formEl)
-    
-        var initialsInput = document.createElement("input")
-        initialsInput.type = "text"
-        initialsInput.placeholder = "Type your initials"
-        formEl.appendChild(initialsInput)
-    
-        // submit button
-        var submitBtn = document.createElement("button")
-        submitBtn.textContent = "Submit"
-        formEl.appendChild(submitBtn)
-    
-        // add submit button click event listener
-        submitBtn.addEventListener("click", function () {
-            var initials = initialsInput.value;
-            showScores(initials);
-        });
-    }
-    
-    function showScores(initials) {
-        // clear the quiz container
-        quizContainer.innerHTML = "";
-    
-        // display the total score
-        var totalScore = document.createElement("h2")
-        totalScore.textContent = "Total Score: " + score
-        quizContainer.appendChild(totalScore);
-    
-        // display the initials
-        var initialsDisplay = document.createElement("p");
-        initialsDisplay.textContent = "Your Initials: " + initials;
-        quizContainer.appendChild(initialsDisplay);
-    }
+function inputInitials() {
+    // create a form 
+    var formEl = document.createElement("form")
+    quizContainer.appendChild(formEl)
+
+    var initialsInput = document.createElement("input")
+    initialsInput.type = "text"
+    initialsInput.placeholder = "Type your initials"
+    formEl.appendChild(initialsInput)
+
+    // submit button
+    var submitBtn = document.createElement("button")
+    submitBtn.textContent = "Submit"
+    formEl.appendChild(submitBtn)
+
+    // add submit button click event listener
+    submitBtn.addEventListener("click", function () {
+        var initials = initialsInput.value;
+        showScores(initials);
+    });
+}
+
+function showScores(initials) {
+    // clear the quiz container
+    quizContainer.innerHTML = "";
+
+    // display the total score
+    var totalScore = document.createElement("h2")
+    totalScore.textContent = "Total Score: " + score
+    quizContainer.appendChild(totalScore);
+
+    // display the initials
+    var initialsDisplay = document.createElement("p");
+    initialsDisplay.textContent = "Your Initials: " + initials;
+    quizContainer.appendChild(initialsDisplay);
+}
