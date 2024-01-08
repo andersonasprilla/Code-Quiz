@@ -84,4 +84,28 @@ const quizData = [
     },   
 ]
 
+var currentQuestionIndex = 0;
 
+function loadQuestion() {
+    //Check if there are still questions remaining
+    if(currentQuestionIndex < quizData.length){
+        var currentQuestion = quizData[currentQuestionIndex]
+
+        //Display the question
+        var question = document.createElement("div")
+        question.textContent = currentQuestion.question
+        quizContainer.appendChild(question)
+
+        //Display options
+        for(var i = 0; i < currentQuestion.options.length; i++){
+            var option = document.createElement("button");
+            option.textContent = currentQuestion.options[i]
+            quizContainer.appendChild(option)
+        }
+    }
+
+   
+    
+    
+
+}
