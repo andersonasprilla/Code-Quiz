@@ -33,6 +33,8 @@ startQuizBtn.addEventListener("click", function () {
     setTimer()
 })
 
+var answerText = document.createElement("h3")
+
 const quizData = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -96,6 +98,7 @@ const quizData = [
 ]
 
 var currentQuestionIndex = 0;
+var score = 0;
 function loadQuestion() {
     //Check if there are still questions remaining
     if (currentQuestionIndex < quizData.length) {
@@ -109,12 +112,34 @@ function loadQuestion() {
         //Display options
         for (var i = 0; i < currentQuestion.options.length; i++) {
             var option = document.createElement("button");
-            option.textContent = currentQuestion.options[i]
-            quizContainer.appendChild(option)
+            option.textContent = currentQuestion.options[i];
+            option.addEventListener("click", function (event) {
+                handleAnswerClick(event.target.textContent, currentQuestion.correctAnswer);
+            });
+            quizContainer.appendChild(option);
         }
     }
 
 }
+
+function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
+    // Check if the selected answer is correct
+    if (selectedAnswer === quizData[currentQuestionIndex].options[correctAnswerIndex]) {
+        score++;
+    }else {      
+        secondsLeft-= 10
+        answerText.textContent = "Wrong"
+        quizContainer.appendChild(answerText)
+        return
+    }
+    // Move to the next question
+    currentQuestionIndex++;
+    // Clear the quiz container for the next question
+    quizContainer.innerHTML = "";
+    // Load the next question or end the quiz if there are no more questions
+    loadQuestion();
+}
+
 
 var secondsLeft = 90
     function setTimer() {
