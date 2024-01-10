@@ -67,9 +67,7 @@ var body = document.body;
 var header = document.createElement("header")
 header.id = "header"
 body.appendChild(header)
-var highScores = document.createElement("h1")
-highScores.textContent = "View Highscores"
-header.appendChild(highScores)
+
 var timerEl = document.createElement("h1")
 header.appendChild(timerEl)
 
@@ -78,30 +76,40 @@ var quizContainer = document.createElement("div")
 quizContainer.id = "quiz-container"
 body.appendChild(quizContainer)
 
-// Create Tittle
-var title = document.createElement("h2")
-title.textContent = "CODING QUIZ CHALLENGE";
-quizContainer.appendChild(title)
+function loadHome() {
+    // Clear the quiz container
+    quizContainer.innerHTML = "";
 
-// Create Description
-var description = document.createElement("p")
-description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten (10) seconds"
-quizContainer.appendChild(description)
+    // Create Title
+    var title = document.createElement("h2");
+    title.textContent = "CODING QUIZ CHALLENGE";
+    quizContainer.appendChild(title);
 
-//Create Start Button and handle events
-var startQuizBtn = document.createElement("button")
-startQuizBtn.textContent = "Start Quiz"
-quizContainer.appendChild(startQuizBtn)
-startQuizBtn.addEventListener("click", function () {
-    title.style.display = "none"
-    description.style.display = "none"
-    startQuizBtn.style.display = "none"
-    loadQuestion()
-    setTimer()
-})
+    // Create Description
+    var description = document.createElement("p");
+    description.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten (10) seconds";
+    quizContainer.appendChild(description);
+
+    // Create Start Button and handle events
+    var startQuizBtn = document.createElement("button");
+    startQuizBtn.textContent = "Start Quiz";
+    quizContainer.appendChild(startQuizBtn);
+    startQuizBtn.addEventListener("click", function () {
+        title.style.display = "none";
+        description.style.display = "none";
+        startQuizBtn.style.display = "none";
+        loadQuestion();
+        setTimer();
+    });
+}
+
+// Call loadHome initially to display the start button
+loadHome();
+
 
 var currentQuestionIndex = 0;
 function loadQuestion() {
+
     // Check if there are still questions remaining and if the timer is not 0
     if (currentQuestionIndex < quizData.length && secondsLeft > 0) {
         var currentQuestion = quizData[currentQuestionIndex];
@@ -205,8 +213,6 @@ function inputInitials() {
         var initials = initialsInput.value;
         showScores(initials);
     });
-
-
 }
 
 function showScores(initials) {
@@ -286,13 +292,7 @@ function resetQuiz() {
     score = 0;
     secondsLeft = 50;
 
-    // Clear the quiz container
-    quizContainer.innerHTML = "";
-
-    // Display the start button again
-    title.style.display = "block";
-    description.style.display = "block";
-    startQuizBtn.style.display = "block";
+   loadHome()
 }
 
 
