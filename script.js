@@ -164,6 +164,7 @@ function handleAnswerClick(selectedAnswer, correctAnswerIndex) {
         currentQuestionIndex++;
         quizContainer.innerHTML = "";
         loadQuestion();
+        
 
     }, 1000); 
 }
@@ -204,6 +205,8 @@ function inputInitials() {
         var initials = initialsInput.value;
         showScores(initials);
     });
+
+
 }
 
 function showScores(initials) {
@@ -211,12 +214,59 @@ function showScores(initials) {
     quizContainer.innerHTML = "";
 
     // display the total score
-    var totalScore = document.createElement("h2")
-    totalScore.textContent = "Total Score: " + score
+    var totalScore = document.createElement("h2");
+    totalScore.textContent = "Total Score: " + score;
     quizContainer.appendChild(totalScore);
 
     // display the initials
     var initialsDisplay = document.createElement("p");
     initialsDisplay.textContent = "Your Initials: " + initials;
     quizContainer.appendChild(initialsDisplay);
+
+    // store data in localStorage
+    var highScoresData = JSON.parse(localStorage.getItem("highScores")) || [];
+    highScoresData.push({ initials: initials, score: score });
+    localStorage.setItem("highScores", JSON.stringify(highScoresData));
+
+    displayHighScores();
 }
+
+
+// Retrieve high scores from localStorage
+function getHighScores() {
+    var highScoresData = JSON.parse(localStorage.getItem("highScores")) || [];
+    return highScoresData;
+}
+
+// Function to display high scores
+function displayHighScores() {
+    // clear the quiz container
+    quizContainer.innerHTML = "";
+
+    // Display the high scores
+    var highScoresData = getHighScores();
+
+    var highScoresTitle = document.createElement("h2");
+    highScoresTitle.textContent = "High Scores";
+    quizContainer.appendChild(highScoresTitle);
+
+    if (highScoresData.length > 0) {
+        // Create an ordered list to display high scores
+        var highScoresList = document.createElement("ol");
+
+        // Iterate through high scores and create list items
+        highScoresData.forEach(function (item) {
+            var scoreItem = document.createElement("li");
+            scoreItem.textContent = item.initials + " - " + item.score;
+            highScoresList.appendChild(scoreItem);
+        });
+
+        quizContainer.appendChild(highScoresList);
+    } else {
+        var noScoresMessage = document.createElement("p");
+        noScoresMessage.textContent = "No high scores available yet.";
+        quizContainer.appendChild(noScoresMessage);
+    }
+}
+
+
