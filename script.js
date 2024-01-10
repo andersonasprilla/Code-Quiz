@@ -238,7 +238,8 @@ function getHighScores() {
     return highScoresData;
 }
 
-// Function to display high scores
+// ... (previous code)
+
 function displayHighScores() {
     // clear the quiz container
     quizContainer.innerHTML = "";
@@ -267,6 +268,33 @@ function displayHighScores() {
         noScoresMessage.textContent = "No high scores available yet.";
         quizContainer.appendChild(noScoresMessage);
     }
+
+    // Add a reset button
+    var resetBtn = document.createElement("button");
+    resetBtn.textContent = "Restart Quiz";
+    quizContainer.appendChild(resetBtn);
+
+    // Add event listener to the reset button
+    resetBtn.addEventListener("click", function () {
+        resetQuiz();
+    });
 }
+
+function resetQuiz() {
+    // Reset variables
+    currentQuestionIndex = 0;
+    score = 0;
+    secondsLeft = 50;
+
+    // Clear the quiz container
+    quizContainer.innerHTML = "";
+
+    // Display the start button again
+    title.style.display = "block";
+    description.style.display = "block";
+    startQuizBtn.style.display = "block";
+}
+
+
 
 
